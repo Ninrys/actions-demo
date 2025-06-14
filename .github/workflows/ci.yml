@@ -1,25 +1,19 @@
-# .github/workflows/ci.yml
+name: flujo-ci-basico
 
-name: flujo-ci-basico # Nombre visible del workflow en GitHub
-
-# 🔁 Este workflow se ejecuta automáticamente cuando se hace un push al repositorio
 on: [push]
 
-# 🧱 Definimos los trabajos a ejecutar (puede haber varios)
 jobs:
-  hola-mundo: # Nombre del job
-    runs-on: ubuntu-latest # 🖥️ Se ejecuta en una máquina virtual Ubuntu
+  hola-mundo:
+    runs-on: ubuntu-latest
 
-    steps: # 🔽 Lista de pasos que ejecuta este trabajo
-      # 1️⃣ Primer paso: clonar el repositorio
+    steps:
+    
       - name: Checkout del repositorio
         uses: actions/checkout@v4
-
-      # 2️⃣ Segundo paso: obtener la IP pública como ejemplo de uso de una Action externa
+    
       - name: Obtener IP pública
         id: ip
         uses: haythem/public-ip@v1.3
-
-      # 3️⃣ Tercer paso: imprimir un saludo usando el valor obtenido
+    
       - name: Imprimir mensaje
         run: echo "¡Hola mundo desde ${{ steps.ip.outputs.ipv4 }}!"
