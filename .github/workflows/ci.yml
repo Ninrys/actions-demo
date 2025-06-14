@@ -3,17 +3,20 @@ name: flujo-ci-basico
 on: [push]
 
 jobs:
-  hola-mundo:
+  test-node:
     runs-on: ubuntu-latest
 
-    steps:
-    
+    steps:    
       - name: Checkout del repositorio
         uses: actions/checkout@v4
     
-      - name: Obtener IP pública
-        id: ip
-        uses: haythem/public-ip@v1.3
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
     
-      - name: Imprimir mensaje
-        run: echo "¡Hola mundo desde ${{ steps.ip.outputs.ipv4 }}!"
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Ejecutar test
+        run: npm test
